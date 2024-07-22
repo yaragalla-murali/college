@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 
 @Entity
+@Audited
 public class Class { 
 	@Id
 	private int id;
@@ -18,14 +20,14 @@ public class Class {
 	private Date endDate;
 	private String time;
 	
-	@ManyToOne
-	private Teacher teacher;
+	@ManyToMany
+	private List<Teacher> teachers=new ArrayList<>();
 	
 	@ManyToMany
 	private List<Student> students=new ArrayList<>();
 	
-	@ManyToOne
-	private Classroom classroom;
+	@ManyToMany(mappedBy ="classes" )
+	private List<Classroom> classrooms;
 	
 	
 	public int getId() {
@@ -58,23 +60,25 @@ public class Class {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+	
 	public List<Student> getStudents() {
 		return students;
 	}
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-	public Classroom getClassroom() {
-		return classroom;
+	
+	public List<Teacher> getTeachers() {
+		return teachers;
 	}
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+	public List<Classroom> getClassrooms() {
+		return classrooms;
+	}
+	public void setClassrooms(List<Classroom> classrooms) {
+		this.classrooms = classrooms;
 	}
 
 }

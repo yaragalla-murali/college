@@ -3,18 +3,21 @@ package com.college.college.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Classroom {
 
 	@Id
 	private int id;
 	private String name;
 	
-	@OneToMany(mappedBy = "classroom")
+	@ManyToMany
 	private List<Class> classes=new ArrayList<>();
 
 	public int getId() {

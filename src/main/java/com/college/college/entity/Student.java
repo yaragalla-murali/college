@@ -3,11 +3,14 @@ package com.college.college.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Student {
 
 	@Id
