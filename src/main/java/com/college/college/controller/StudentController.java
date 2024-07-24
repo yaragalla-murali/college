@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.college.college.controller.service.StudentService;
 import com.college.college.entity.Student;
+import com.college.college.service.StudentService;
 
 @RestController
 @RequestMapping("/students")

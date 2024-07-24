@@ -1,8 +1,8 @@
-package com.college.college.controller.service;
+package com.college.college.service;
 
 import org.springframework.stereotype.Service;
 
-import com.college.college.controller.dao.StudentDao;
+import com.college.college.dao.StudentDao;
 import com.college.college.entity.Student;
 import com.college.college.exception.ElementAlreadyExistException;
 import com.college.college.exception.NoSuchElementException;

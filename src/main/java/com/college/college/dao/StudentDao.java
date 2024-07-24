@@ -1,4 +1,4 @@
-package com.college.college.controller.dao;
+package com.college.college.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
