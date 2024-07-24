@@ -1,6 +1,5 @@
 package com.college.college.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.envers.Audited;
@@ -18,7 +17,7 @@ public class Teacher {
 	private String name;
 	
 	@ManyToMany(mappedBy = "teachers")
-	private List<Class> collegeClasses=new ArrayList<>();
+	private List<Class> collegeClasses;
 	
 	public int getId() {
 		return id;

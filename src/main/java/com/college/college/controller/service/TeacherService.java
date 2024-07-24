@@ -1,11 +1,57 @@
 package com.college.college.controller.service;
 
+import org.springframework.stereotype.Service;
+
+import com.college.college.controller.dao.TeacherDao;
 import com.college.college.entity.Teacher;
+import com.college.college.exception.ElementAlreadyExistException;
+import com.college.college.exception.NoSuchElementException;
 
-public interface TeacherService {
+@Service
+public class TeacherService{
 
-	public String addTeacher(Teacher teacher);
-	public String updateTeacher(Teacher teacher);
-	public Teacher getTeacher(Integer id);
-	public String deleteTeacher(Integer id);
+	
+	private TeacherDao teacherDao;
+	
+	public TeacherService(TeacherDao teacherDao) {
+		this.teacherDao=teacherDao;
+	}
+	
+	
+	public Teacher addTeacher(Teacher teacher) {
+		Teacher _teacher=teacherDao.findById(teacher.getId()).orElse(null);
+		if(_teacher!=null) {
+			throw new ElementAlreadyExistException("Teacher with the ID : "+teacher.getId()+" already exist");
+		}
+		return teacherDao.save(teacher) ;
+	}
+	
+	
+	public Teacher updateTeacher(Teacher teacher) {	
+		Teacher _teacher=teacherDao.findById(teacher.getId()).orElse(null);
+		if(_teacher==null) {
+			throw new NoSuchElementException("Teacher with the ID : "+teacher.getId()+" does not exist");
+		}
+		return teacherDao.save(teacher);
+	}
+
+	
+	public Teacher getTeacher(Integer id) {	
+		Teacher _teacher=teacherDao.findById(id).orElse(null);
+		if(_teacher==null) {
+			throw new NoSuchElementException("Teacher with the ID : "+id+" does not exist");
+		}
+		return _teacher;
+	}
+
+	
+	public String deleteTeacher(Integer id) {
+		Teacher _teacher=teacherDao.findById(id).orElse(null);
+		if(_teacher==null) {
+			throw new NoSuchElementException("Teacher with the ID : "+id+" does not exist");
+		}
+		teacherDao.deleteById(id);
+		return "Teacher with ID : "+id+" deleted successfully";
+	}
+
 }

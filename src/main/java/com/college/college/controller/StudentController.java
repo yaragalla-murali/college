@@ -1,6 +1,5 @@
 package com.college.college.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,31 +13,34 @@ import com.college.college.controller.service.StudentService;
 import com.college.college.entity.Student;
 
 @RestController
-@RequestMapping("/college")
+@RequestMapping("/students")
 public class StudentController {
 
-	@Autowired
 	private StudentService studentService;
 	
-	@PostMapping("/addStudent")
-	public String addStudent(@RequestBody Student student) {
-		String status=studentService.addStudent(student);
-		return status;
+	public StudentController(StudentService studentService) {
+		this.studentService=studentService;
 	}
 	
-	@PutMapping("/updateStudent")
-	public String updatetudent(@RequestBody Student student) {
-		String status=studentService.updateStudent(student);
-		return status;
+	@PostMapping
+	public Student addStudent(@RequestBody Student student) {		
+		return studentService.addStudent(student);
 	}
 	
-	@GetMapping("/getStudent/{id}")
+	@PutMapping
+	public Student updatetudent(@RequestBody Student student) {		
+		return studentService.updateStudent(student);
+	}
+	
+	@GetMapping("/{id}")
 	public Student getStudent(@PathVariable Integer id) {		
 		return studentService.getStudent(id);
 	}
 	
-	@DeleteMapping("/deleteStudent/{id}")
+	@DeleteMapping("/{id}")
 	public String deleteStudent(@PathVariable Integer id) {		
 		return studentService.deleteStudent(id);
 	}
+	
+	
 }

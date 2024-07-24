@@ -1,6 +1,5 @@
 package com.college.college.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,30 +13,32 @@ import com.college.college.controller.service.TeacherService;
 import com.college.college.entity.Teacher;
 
 @RestController
-@RequestMapping("/college")
+@RequestMapping("/teachers")
 public class TeacherController {
 	
-	@Autowired
+	
 	private TeacherService teacherService;
 	
-	@PostMapping("/addTeacher")
-	public String addTeacher(@RequestBody Teacher teacher) {
-		String status=teacherService.addTeacher(teacher);
-		return status;
+	public TeacherController(TeacherService teacherService) {
+		this.teacherService=teacherService;
 	}
 	
-	@PutMapping("/updateTeacher")
-	public String updateTeacher(@RequestBody Teacher teacher) {
-		String status=teacherService.updateTeacher(teacher);
-		return status;
+	@PostMapping
+	public Teacher addTeacher(@RequestBody Teacher teacher) {		
+		return teacherService.addTeacher(teacher);
 	}
 	
-	@GetMapping("/getTeacher/{id}")
+	@PutMapping
+	public Teacher updateTeacher(@RequestBody Teacher teacher) {		
+		return teacherService.updateTeacher(teacher);
+	}
+	
+	@GetMapping("/{id}")
 	public Teacher getTeacher(@PathVariable Integer id) {		
 		return teacherService.getTeacher(id);
 	}
 	
-	@DeleteMapping("/deleteTeacher/{id}")
+	@DeleteMapping("/{id}")
 	public String deleteTeacher(@PathVariable Integer id) {		
 		return teacherService.deleteTeacher(id);
 	}

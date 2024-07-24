@@ -1,6 +1,5 @@
 package com.college.college.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +20,10 @@ public class Class {
 	private String time;
 	
 	@ManyToMany
-	private List<Teacher> teachers=new ArrayList<>();
+	private List<Teacher> teachers;
 	
 	@ManyToMany
-	private List<Student> students=new ArrayList<>();
+	private List<Student> students;
 	
 	@ManyToMany(mappedBy ="classes" )
 	private List<Classroom> classrooms;
@@ -79,6 +78,12 @@ public class Class {
 	}
 	public void setClassrooms(List<Classroom> classrooms) {
 		this.classrooms = classrooms;
+	}
+	@Override
+	public String toString() {
+		return "Class [id=" + id + ", className=" + className + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", time=" + time + ", teachers=" + teachers + ", students=" + students + ", classrooms=" + classrooms
+				+ "]";
 	}
 
 }
