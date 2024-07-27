@@ -1,9 +1,11 @@
 package com.college.college.entity;
 
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.hibernate.envers.Audited;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,9 +17,13 @@ public class Class {
 	@Id
 	private int id;
 	private String className;
-	private Date startDate;
-	private Date endDate;
-	private String time;
+	
+	
+	private LocalTime startTime;
+	
+	
+	private LocalTime endTime;
+	
 	
 	@ManyToMany
 	private List<Teacher> teachers;
@@ -41,24 +47,6 @@ public class Class {
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
 	
 	public List<Student> getStudents() {
 		return students;
@@ -79,11 +67,18 @@ public class Class {
 	public void setClassrooms(List<Classroom> classrooms) {
 		this.classrooms = classrooms;
 	}
-	@Override
-	public String toString() {
-		return "Class [id=" + id + ", className=" + className + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", time=" + time + ", teachers=" + teachers + ", students=" + students + ", classrooms=" + classrooms
-				+ "]";
+	public LocalTime getStartTime() {
+		return startTime;
 	}
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
+	
 
 }
