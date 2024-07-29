@@ -3,10 +3,10 @@ package com.college.college.exception;
 public class ErrorResponse {
 
 	private int statusCode;
-	private String msg;
+	private String message;
 	
-	public ErrorResponse(int statusCode,String msg) {
-		this.msg=msg;
+	public ErrorResponse(int statusCode,String message) {
+		this.message=message;
 		this.statusCode=statusCode;
 	}
 
@@ -18,11 +18,13 @@ public class ErrorResponse {
 		this.statusCode = statusCode;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
+
+	
 }

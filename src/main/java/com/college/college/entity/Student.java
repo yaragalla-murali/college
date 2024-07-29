@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.envers.Audited;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -17,7 +16,7 @@ public class Student {
 	private int id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "students")
 	private List<Class> collegeClasses;
 
 	public int getId() {

@@ -1,11 +1,13 @@
 package com.college.college.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.college.college.dao.StudentDao;
 import com.college.college.entity.Student;
-import com.college.college.exception.ElementAlreadyExistException;
-import com.college.college.exception.NoSuchElementException;
+import com.college.college.exception.RecordAlreadyExistException;
+import com.college.college.exception.NoSuchRecordException;
 
 @Service
 public class StudentService  {
@@ -20,40 +22,51 @@ public class StudentService  {
 
 	
 	public Student addStudent(Student student) {
-		Student std=studentdao.findById(student.getId()).orElse(null);
-		if(std!=null) {
-			throw new ElementAlreadyExistException("Student with the ID : "+student.getId()+" already exist");
+		
+		if(studentdao.findById(student.getId()).orElse(null)!=null) {
+			throw new RecordAlreadyExistException("Student with the ID : "+student.getId()+" already exist");
 		}
+		
 		return studentdao.save(student);
 	}
 
 	
 	public Student updateStudent(Student student) {	
-		Student std=studentdao.findById(student.getId()).orElse(null);
-		if(std==null) {
-			throw new NoSuchElementException("The student with the ID : "+student.getId()+" does not exist");
+		
+		if(studentdao.findById(student.getId()).orElse(null)==null) {
+			throw new NoSuchRecordException("The student with the ID : "+student.getId()+" does not exist");
 		}
 		return studentdao.save(student);
 	}
 
 	
 	public Student getStudent(Integer id) {	
-		Student std=studentdao.findById(id).orElse(null);
-		if(std==null) {
-			throw new NoSuchElementException("The student with the ID : "+id+" does not exist");
+		Student student=studentdao.findById(id).orElse(null);
+		if(student==null) {
+			throw new NoSuchRecordException("The student with the ID : "+id+" does not exist");
 		}
-		return std;
+		return student;
 	}
 
 	
 	public String deleteStudent(Integer id) {
-		Student std=studentdao.findById(id).orElse(null);
-		if(std==null) {
-			throw new NoSuchElementException("The student with the ID : "+id+" does not exist");
+		Student student=studentdao.findById(id).orElse(null);
+		if(student==null) {
+			throw new NoSuchRecordException("The student with the ID : "+id+" does not exist");
 		}
 		//deleteById() is a void method 
 		studentdao.deleteById(id);
 		return "Student with Id : "+id+" deleted successfully";
+	}
+	
+	public List<Student> getAllStudents(){
+		List<Student> students=studentdao.findAll();
+		return students;
+	}
+	
+	public String deleteAllStudents() {
+		studentdao.deleteAll();
+		return "All Students deleted successfully"; 
 	}
 
 }

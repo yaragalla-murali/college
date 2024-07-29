@@ -1,5 +1,7 @@
 package com.college.college.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.college.college.entity.Student;
 import com.college.college.entity.Teacher;
 import com.college.college.service.TeacherService;
 
@@ -41,6 +44,16 @@ public class TeacherController {
 	@DeleteMapping("/{id}")
 	public String deleteTeacher(@PathVariable Integer id) {		
 		return teacherService.deleteTeacher(id);
+	}
+	
+	@GetMapping("/getAll")
+	public List<Teacher> getAllTeachers(){
+		return teacherService.getAllTeachers();
+	}
+	
+	@DeleteMapping("/deleteAll")
+	public String deleteAllTeachers() {
+		return teacherService.deleteAllTeachers();
 	}
 	
 	
