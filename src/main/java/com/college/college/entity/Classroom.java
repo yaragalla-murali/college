@@ -1,29 +1,25 @@
 package com.college.college.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Classroom {
 
-	@Id
-	private int id;
+	@Id	
 	private String name;
 	
-	@OneToMany(mappedBy = "classroom")
-	private List<Class> classes=new ArrayList<>();
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	private List<Class> classes;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public List<Class> getClasses() {
 		return classes;
@@ -40,4 +36,11 @@ public class Classroom {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "Classroom [name=" + name + ", classes=" + classes + "]";
+	}
+
+	
 }

@@ -1,21 +1,24 @@
 package com.college.college.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Teacher {
 
 	@Id
 	private int id;
 	private String name;
 	
-	@OneToMany(mappedBy = "teacher")
-	private List<Class> collegeClasses=new ArrayList<>();
+	@ManyToMany(mappedBy = "teachers", cascade = CascadeType.PERSIST)
+	private List<Class> collegeClasses;
 	
 	public int getId() {
 		return id;

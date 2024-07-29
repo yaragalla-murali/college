@@ -1,13 +1,15 @@
 package com.college.college.entity;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.envers.Audited;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
+@Audited
 public class Student {
 
 	@Id
@@ -15,7 +17,7 @@ public class Student {
 	private String name;
 	
 	@ManyToMany(mappedBy = "students")
-	private List<Class> collegeClasses=new ArrayList<>();
+	private List<Class> collegeClasses;
 
 	public int getId() {
 		return id;
@@ -39,6 +41,11 @@ public class Student {
 
 	public void setCollegeClasses(List<Class> collegeClasses) {
 		this.collegeClasses = collegeClasses;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", collegeClasses=" + collegeClasses + "]";
 	}
 	
 	
